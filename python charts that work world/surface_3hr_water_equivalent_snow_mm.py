@@ -326,26 +326,7 @@ def process_frame(args):
         else:
             three_hour_snow_mm = np.zeros_like(to_np(total_snow_mm))
 
-        # Temps (kept for parity) + vinterp fix
-        temp = wrf.getvar(ncfile, "T2", timeidx=time_index)
 
-        # --- FIX: time-consistent vinterp to prevent shape/time mismatch ---
-        temp2_all = wrf.getvar(
-            ncfile, "temp", units="degC", timeidx=ALL_TIMES, method="cat"
-        )
-        temp2_frame = temp2_all[time_index, ...]
-        temp_850 = wrf.vinterp(
-            ncfile,
-            temp2_frame,
-            "pressure",
-            [850],
-            field_type="tc",
-            extrapolate=True,
-            squeeze=True,
-            meta=True,
-            timeidx=time_index,
-        )
-        temp_850 = np.squeeze(temp_850, axis=0)
 
         # Lat/lon per frame
         lats, lons = wrf.latlon_coords(slp)
@@ -363,13 +344,9 @@ def process_frame(args):
         # numpy + continuity
         slp_np = to_np(slp)
         snow_np = to_np(three_hour_snow_mm)
-        temp_np = to_np(temp)
-        t850_np = to_np(temp_850)
-
-        lats_np, lons_np, slp_np, snow_np, temp_np, t850_np = (
+        lats_np, lons_np, slp_np, snow_np= (
             handle_domain_continuity_and_polar_mask(
-                lats_np, lons_np, slp_np, snow_np, temp_np, t850_np
-            )
+                lats_np, lons_np, slp_np, snow_np)
         )
 
         # Figure
@@ -397,10 +374,8 @@ def process_frame(args):
 
         # Smooth fields (same sigmas)
         smooth_slp = gaussian_filter(slp_np, sigma=5.0)
-        _ = gaussian_filter(temp_np, sigma=1.0)
-        _ = gaussian_filter(t850_np, sigma=1.0)
 
-        # SLP contours
+       # SLP contours
         contour_interval = 4 if (avg_dx_km >= 9 or avg_dy_km >= 9) else 2
         SLP_levels = np.arange(870, 1090, contour_interval)
 
