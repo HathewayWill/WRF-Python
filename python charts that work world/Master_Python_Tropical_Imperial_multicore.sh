@@ -60,30 +60,6 @@ run_scripts_in_parallel() {
 # Point-based scripts for each selected station
 ###############################################################################
 
-# WBGT time series (DegF)
-run_wbgt_timeseries() {
-  local domain="$1"
-
-  for location in "${!locations[@]}"; do
-    local lat_long="${locations[$location]}"
-    local lat long
-    lat=$(echo "$lat_long" | cut -d',' -f1)
-    long=$(echo "$lat_long" | cut -d',' -f2)
-
-    mkdir -p "$parent_folder/$domain/$location" || { echo "Failed to create directory $parent_folder/$domain/$location"; exit 1; }
-    cd "$parent_folder/$domain/$location" || { echo "Failed to cd into $parent_folder/$domain/$location"; exit 1; }
-
-    echo "Running wbgt_solar_timeseries_degf.py for $location in $domain (lat=$lat lon=$long)"
-    python3 "$script_dir/wbgt_solar_timeseries_degf.py" \
-      "$run_location" "$domain" "$location" "$lat" "$long" 2>&1 || {
-        echo "wbgt_solar_timeseries_degf.py failed for $location in $domain"
-        exit 1
-      }
-
-    cd "$script_dir" || { echo "Failed to cd back to $script_dir"; exit 1; }
-  done
-}
-
 # Vertical wind profile
 run_vertical_wind() {
   local domain="$1"
@@ -218,9 +194,6 @@ mkdir -p "$parent_folder"
 
 find_wrf_run_directories
 
-echo "Running point-based charts for domain d02."
-run_wbgt_timeseries "d02"
-sleep 5
 run_meteogram "d02"
 sleep 5
 run_skew_t "d02"
