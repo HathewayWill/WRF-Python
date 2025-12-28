@@ -575,7 +575,7 @@ if __name__ == "__main__":
     # -------------------------------------------------------------------------
     # Output directories (Images + Animation)
     # -------------------------------------------------------------------------
-    path_figures = "wrf_SFC_DailySnow_Inch_figures"
+    path_figures = "wrf_SFC_Daily_Water_equivalent_Snow_mm_figures"
     image_folder = os.path.join(path_figures, "Images")
     animation_folder = os.path.join(path_figures, "Animation")
 
@@ -657,7 +657,7 @@ if __name__ == "__main__":
         print("No images loaded for GIF creation. Skipping GIF step.")
         sys.exit(0)
 
-    gif_file_out = f"wrf_{domain}_Daily_Total_Snow_Inch_SLP_Isotherm.gif"
+    gif_file_out = f"wrf_{domain}_SFC_Daily_Water_equivalent_Snow_mm.gif"
     gif_path = os.path.join(animation_folder, gif_file_out)
 
     images[0].save(
