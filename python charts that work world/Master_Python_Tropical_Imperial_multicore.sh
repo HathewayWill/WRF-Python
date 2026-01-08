@@ -273,8 +273,8 @@ d02_scripts=(
 
   "surface_windchill_degf_slp_wind_speed_dir.py"
   "surface_visibility_miles.py"
-  "mixed_layer_lifted_index.py"
-  "surface_based_lifted_index.py"
+  #"mixed_layer_lifted_index.py"
+  #"surface_based_lifted_index.py"
 
   # Tropical (imperial-leaning: mph gust/speed + degF SST)
   "tropical_surface_slp_wind_speed_mph_direction.py"
