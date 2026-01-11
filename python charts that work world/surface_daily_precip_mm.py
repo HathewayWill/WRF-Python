@@ -556,7 +556,6 @@ def process_frame(args):
                 200,
                 250,
                 300,
-                350,
             ]
         )
 
