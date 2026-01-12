@@ -191,13 +191,13 @@ mkdir -p "$parent_folder"
 
 find_wrf_run_directories
 
-run_meteogram "d02"
+#run_meteogram "d02"
 sleep 5
-run_skew_t "d02"
+#run_skew_t "d02"
 sleep 5
-run_vertical_wind "d02"
+#run_vertical_wind "d02"
 sleep 5
-run_vertical_wind_4km "d02"
+#run_vertical_wind_4km "d02"
 
 ###############################################################################
 # Scripts to run in parallel for domain d01
@@ -221,6 +221,7 @@ d01_scripts=(
   "cloud_top_temperature.py"
   "precipitable_water_cm.py"
   "cloud_top_temperature_rainbow.py"
+  "Road_Icing_Index_multicore_Publication_version.py"
 )
 
 run_scripts_in_parallel "d01" "${d01_scripts[@]}"
@@ -236,13 +237,11 @@ d02_scripts=(
   "cloud_top_temperature.py"
   "precipitable_water_cm.py"
 
+  "Road_Icing_Index_multicore_Publication_version.py"
+
   "surface_1hr_precip_mm_slp_isotherm.py"
   "surface_1hr_snow_mm_slp_isotherm.py"
   "surface_1hr_water_equivalent_snow_mm_slp_isotherm.py"
-
-  "surface_24hr_precip_mm.py"
-  "surface_24hr_snow_mm.py"
-  "surface_24hr_water_equivalent_snow_mm.py"
 
   "surface_3hr_precip_mm.py"
   "surface_3hr_snow_mm.py"

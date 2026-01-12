@@ -309,6 +309,7 @@ d01_scripts=(
   "cloud_top_temperature.py"
   "precipitable_water_inch.py"
   "cloud_top_temperature_rainbow.py"
+  "Road_Icing_Index_multicore_Publication_version.py"  
 )
 
 run_scripts_in_parallel "d01" "${d01_scripts[@]}"
@@ -324,13 +325,11 @@ d02_scripts=(
   "cloud_top_temperature.py"
   "precipitable_water_inch.py"
 
+  "Road_Icing_Index_multicore_Publication_version.py"
+
   "surface_1hr_precip_inch_slp_isotherm.py"
   "surface_1hr_snow_inch_slp_isotherm.py"
   "surface_1hr_water_equivalent_snow_inch_slp_isotherm.py"
-
-  "surface_24hr_precip_inch.py"
-  "surface_24hr_snow_inch.py"
-  "surface_24hr_water_equivalent_snow_inch.py"
 
   "surface_3hr_precip_inch.py"
   "surface_3hr_snow_inch.py"
